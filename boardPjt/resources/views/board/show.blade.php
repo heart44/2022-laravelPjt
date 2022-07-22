@@ -21,6 +21,7 @@
     <div>제목 : {{ $data->title }}</div>
     <div>조회수 : {{ $data->hits }}</div>
     <div>작성일 : {{ $data->created_at }}</div>
+    <div>작성일 : {{ $data->updated_at }}</div>
     <div>내용</div>
     <div>{{ $data->ctnt }}</div>
 
