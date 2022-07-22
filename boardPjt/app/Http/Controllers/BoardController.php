@@ -28,7 +28,14 @@ class BoardController extends Controller {
         return redirect('/boards'); //주소 이동
     }
 
-    public function show() {
-        return view('board/show');
+    public function show(Request $req) {
+        $id = $req->input('id');
+        return view('board/show')->with("data", Board::findOrFail($id));
+    }
+
+    public function destroy(Request $req) {
+        $id = $req->input('id');
+        Board::find($id)->delete();
+        return redirect('/boards');
     }
 }
