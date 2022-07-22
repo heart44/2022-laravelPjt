@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/boards', [BoardController::class, 'index']);
-Route::get('/boards/create', [BoardController::class, 'create'])->name('boards.create');
-Route::get('/boards/show', [BoardController::class, 'show'])->name('boards.show');
+//그룹 (1차 주소가 같아서 중복됨)
+Route::prefix('boards')->group(function() {
+    Route::get('/', [BoardController::class, 'index']);
+    Route::get('create', [BoardController::class, 'create'])->name('boards.create');
+    Route::post('store', [BoardController::class, 'store'])->name('boards.store');
+    Route::get('show', [BoardController::class, 'show'])->name('boards.show');
+});
