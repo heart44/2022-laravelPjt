@@ -8,18 +8,20 @@ class BoardController extends Controller {
     // p.77 라우트명의 관례 학습
 
     public function index() {
-        return view('board/index');
+        //Board::all() -> 전체 select 해오는 것
+        $list = Board::select(['id', 'title', 'hits', 'created_at'])->orderBy('id', 'desc')->get();
+        return view('board/index')->with('list', $list);
     }
 
     public function create() {
         return view('board/create');
     }
 
-    public function store() {
+    public function store(Request $req) {
         $board = new Board([
-            "title" => "제목1",
-            "ctnt" => "내용2",
-            "hits" => "0",
+            "title" => $req->input("title"),
+            "ctnt" => $req->input("ctnt"),
+            "hits" => 0,
         ]);
         $board->save(); //insert 됨
 

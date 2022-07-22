@@ -17,5 +17,35 @@
             <button type="button">디테일</button>
         </a>
     </div>
+    <table>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>제목</th>
+                <th>작성일</th>
+                <th>조회수</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($list as $item)
+                <tr class="row" data-id={{ $item->id }}>
+                    <td>{{ $item->id }}</td>
+                    <td>{{ $item->title }}</td>
+                    <td>{{ $item->created_at }}</td>
+                    <td>{{ $item->hits }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <script>
+        const rowList = document.querySelectorAll('.row');
+        if(rowList) {
+            rowList.forEach(item => {
+                item.addEventListener('click', e => {
+                    location.href = `/boards/show?id=${item.dataset.id}`;
+                });
+            });
+        }
+    </script>
 </body>
 </html>
