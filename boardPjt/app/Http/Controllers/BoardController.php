@@ -23,9 +23,9 @@ class BoardController extends Controller {
             "ctnt" => $req->input("ctnt"),
             "hits" => 0,
         ]);
-        $board->save(); //insert 됨
+        $board->save(); //insert 됨, 바로 id값 넘어오게 세팅 돼있다고 함
 
-        return redirect('/boards'); //주소 이동
+        return redirect()->route('boards.show', ['id' => $board->id]); //주소 이동
     }
 
     public function show(Request $req) {
